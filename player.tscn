@@ -1,26 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmdsb1nnu15ex"]
+[gd_scene load_steps=5 format=3 uid="uid://dmdsb1nnu15ex"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ebsj3"]
 [ext_resource type="PackedScene" uid="uid://dx4h46mcsm15d" path="res://Models/mainchar.glb" id="1_vakpg"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_vey2y"]
-height = 1.85
-radius = 0.4
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jn3u5"]
+height = 1.88193
+radius = 0.238524
 
-[sub_resource type="Animation" id="Animation_1wbi5"]
-resource_name = "standing"
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/mainchar")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array()
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q0rrx"]
-_data = {
-"standing": SubResource("Animation_1wbi5")
-}
+[sub_resource type="BoxShape3D" id="BoxShape3D_cd3h2"]
+size = Vector3(0.640625, 1.59326, 0.815918)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ebsj3")
@@ -29,11 +17,14 @@ script = ExtResource("1_ebsj3")
 
 [node name="mainchar" parent="Pivot" instance=ExtResource("1_vakpg")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.921419, 0)
-shape = SubResource("CylinderShape3D_vey2y")
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000137329, 0.928758, 0.0166016)
+shape = SubResource("CylinderShape3D_jn3u5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_q0rrx")
-}
+[node name="AttackRange" type="Area3D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="AttackCollision" type="CollisionShape3D" parent="AttackRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00630093, 0.956533, 0.554922)
+shape = SubResource("BoxShape3D_cd3h2")

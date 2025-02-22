@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://drdoflufsqjmr"]
+[gd_scene load_steps=5 format=3 uid="uid://drdoflufsqjmr"]
 
 [ext_resource type="PackedScene" uid="uid://dmdsb1nnu15ex" path="res://player.tscn" id="1_8c0ag"]
+[ext_resource type="PackedScene" uid="uid://bglqrc3nsavbv" path="res://enemy.tscn" id="2_y0rqi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w3efv"]
 size = Vector3(60, 2, 60)
@@ -20,12 +21,18 @@ shape = SubResource("BoxShape3D_w3efv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_gun7c")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 7, 0)
-
 [node name="Player" parent="." instance=ExtResource("1_8c0ag")]
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11345, 1.508, 6.06306)
+transform = Transform3D(0.747762, -0.0843876, 0.658582, -0.168516, 0.935292, 0.311178, -0.642226, -0.343669, 0.685155, 4.22638, 3.82274, 7.80758)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00725, -2.71344)
+
+[node name="Enemy" parent="." instance=ExtResource("2_y0rqi")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 7)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00725, 6.99378)
