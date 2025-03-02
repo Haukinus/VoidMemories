@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bglqrc3nsavbv"]
+
+[ext_resource type="Script" path="res://Scripts/EntityScripts/enemy.gd" id="1_r6rr4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7gt1w"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lvflh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chu57"]
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_r6rr4")
+
+[node name="EnemyCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522697, 0)
+shape = SubResource("BoxShape3D_7gt1w")
+
+[node name="EnemyShape" type="MeshInstance3D" parent="EnemyCollision"]
+mesh = SubResource("BoxMesh_lvflh")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525838, 0)
+collision_layer = 24
+collision_mask = 24
+input_ray_pickable = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_chu57")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
