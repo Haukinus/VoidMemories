@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmdsb1nnu15ex"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_ebsj3"]
+[ext_resource type="Script" path="res://Scripts/EntityScripts/player.gd" id="1_ebsj3"]
 [ext_resource type="PackedScene" uid="uid://dx4h46mcsm15d" path="res://Models/mainchar.glb" id="1_vakpg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jn3u5"]
@@ -11,6 +11,7 @@ radius = 0.238524
 size = Vector3(0.640625, 1.59326, 0.815918)
 
 [node name="Player" type="CharacterBody3D"]
+collision_mask = 7
 script = ExtResource("1_ebsj3")
 
 [node name="Pivot" type="Node3D" parent="."]
@@ -22,9 +23,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000137329, 0.928758, 0.016
 shape = SubResource("CylinderShape3D_jn3u5")
 
 [node name="AttackRange" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 24
 monitoring = false
 monitorable = false
 
 [node name="AttackCollision" type="CollisionShape3D" parent="AttackRange"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00630093, 0.956533, 0.554922)
 shape = SubResource("BoxShape3D_cd3h2")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="DelayTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="DelayTimer" to="." method="_on_delay_timer_timeout"]

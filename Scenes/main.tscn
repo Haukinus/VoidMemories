@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://drdoflufsqjmr"]
+[gd_scene load_steps=6 format=3 uid="uid://drdoflufsqjmr"]
 
-[ext_resource type="PackedScene" uid="uid://dmdsb1nnu15ex" path="res://player.tscn" id="1_8c0ag"]
-[ext_resource type="PackedScene" uid="uid://bglqrc3nsavbv" path="res://enemy.tscn" id="2_y0rqi"]
+[ext_resource type="PackedScene" uid="uid://dmdsb1nnu15ex" path="res://Scenes/Characters/player.tscn" id="1_8c0ag"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_bk7id"]
+[ext_resource type="PackedScene" uid="uid://bglqrc3nsavbv" path="res://Scenes/Entities/enemy.tscn" id="2_y0rqi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w3efv"]
 size = Vector3(60, 2, 60)
@@ -10,18 +11,17 @@ size = Vector3(60, 2, 60)
 size = Vector3(60, 2, 60)
 
 [node name="main" type="Node"]
+script = ExtResource("1_bk7id")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Ground"]
+[node name="GroundCollission" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("BoxShape3D_w3efv")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_gun7c")
-
-[node name="Player" parent="." instance=ExtResource("1_8c0ag")]
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 
@@ -31,8 +31,13 @@ transform = Transform3D(0.747762, -0.0843876, 0.658582, -0.168516, 0.935292, 0.3
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00725, -2.71344)
 
-[node name="Enemy" parent="." instance=ExtResource("2_y0rqi")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 7)
-
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00725, 6.99378)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_y0rqi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.13012, 0, 0)
+
+[node name="Enemy" parent="." instance=ExtResource("2_y0rqi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.01076)
+
+[node name="Player" parent="." instance=ExtResource("1_8c0ag")]
